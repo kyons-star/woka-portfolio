@@ -1,17 +1,22 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "laravel": {
-      "root": "woka/",
-      "entrypoint": "Dockerfile.vercel"
+  "version": 2,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.4"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": {
-        "service": "laravel"
-      }
+      "src": "/(css|js|build|images|img|fonts)/(.*)",
+      "dest": "/public/$1/$2"
+    },
+    {
+      "src": "/(favicon.ico|robots.txt)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ]
 }
