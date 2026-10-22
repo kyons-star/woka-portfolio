@@ -1,0 +1,2 @@
+{{-- Browser-window style thumbnail of a portfolio. Needs: $d, $style --}}
+<div class="panel"><div class="dev"><div class="chrome"><i></i><i></i><i></i></div><div class="pv" data-r=".75">@include('partials.portfolio', ['d' => $d, 'style' => $style])</div></div></div>
