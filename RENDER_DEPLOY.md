@@ -31,7 +31,8 @@ web service in Singapore and uses Supabase PostgreSQL in Mumbai.
    - `DB_USERNAME`: `woka_runtime.jdfdkijvhcmmqcajbffd`.
    - `DB_PASSWORD`: the new runtime-role password entered in Supabase SQL
      Editor.
-   Render generates `APP_KEY` automatically.
+   Render generates `APP_KEY` automatically; the application normalizes its
+   generated Base64 key to Laravel's expected format.
 4. Do not enter a Supabase secret/service-role key. Laravel connects directly
    to PostgreSQL; it does not need the publishable key for this connection.
 5. Click **Apply**. Render builds the Docker image and deploys the web service.

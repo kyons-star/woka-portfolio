@@ -58,6 +58,7 @@ COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/entrypoint.sh /usr/local/bin/woka-entrypoint
 
 RUN chmod 0755 /usr/local/bin/woka-entrypoint \
+    && chmod -R a+rX public/build \
     && mkdir -p \
         storage/app/private \
         storage/app/public \

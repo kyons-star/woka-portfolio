@@ -97,7 +97,19 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'key' => env('APP_KEY'),
+    'key' => (static function (): ?string {
+        $key = env('APP_KEY');
+
+        if (! is_string($key) || str_starts_with($key, 'base64:')) {
+            return $key;
+        }
+
+        $decoded = base64_decode($key, true);
+
+        return $decoded !== false && strlen($decoded) === 32
+            ? 'base64:'.$key
+            : $key;
+    })(),
 
     'previous_keys' => [
         ...array_filter(
