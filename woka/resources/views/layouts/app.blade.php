@@ -6,7 +6,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>@yield('title', 'woka – portfolio builder')</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@85..100,500..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 <div class="sheet">
@@ -43,6 +43,5 @@
 
   <footer>© woka · portfolio builder</footer>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
