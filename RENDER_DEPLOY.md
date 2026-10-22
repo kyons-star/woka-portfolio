@@ -1,9 +1,8 @@
 # Deploy Woka to Render with Supabase
 
 This repository is a monorepo: Render's Blueprint is at the repository root
-and the Laravel application is in `woka/`. The Blueprint builds the Docker
-service in Singapore, uses Supabase PostgreSQL in Mumbai, and attaches a
-persistent disk for uploaded portfolio photos.
+and the Laravel application is in `woka/`. The Blueprint deploys a free Docker
+web service in Singapore and uses Supabase PostgreSQL in Mumbai.
 
 ## Before creating the Render service
 
@@ -22,10 +21,11 @@ persistent disk for uploaded portfolio photos.
 
 1. In Render, choose **New → Blueprint** and connect
    `kyons-star/woka-portfolio`, branch `main`.
-2. Review `render.yaml` before confirming. It creates a paid Starter web
-   service and a 1 GB persistent disk. The disk preserves uploaded profile
-   photos; Render's free filesystem is ephemeral. A service with a disk cannot
-   scale to multiple instances and has brief downtime during deploys.
+2. Review `render.yaml` before confirming. It creates a Free web service. Free
+   services sleep after 15 minutes without traffic, may take about a minute to
+   wake, and have ephemeral storage. Uploaded profile photos may be lost after
+   sleep, restart, or redeploy; the Supabase database continues to retain user
+   and portfolio records.
 3. When prompted for unsynchronized values, enter:
    - `APP_URL`: the HTTPS URL Render assigns to this web service.
    - `DB_USERNAME`: `woka_runtime.jdfdkijvhcmmqcajbffd`.

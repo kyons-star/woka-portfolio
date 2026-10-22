@@ -2,17 +2,13 @@ services:
   - type: web
     name: woka-portfolio
     runtime: docker
-    plan: starter
+    plan: free
     region: singapore
     rootDir: woka
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /up
     autoDeploy: true
-    disk:
-      name: woka-uploads
-      mountPath: /var/www/html/storage/app/public
-      sizeGB: 1
     envVars:
       - key: APP_ENV
         value: production
