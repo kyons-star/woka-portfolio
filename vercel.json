@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "laravel": {
+      "root": "woka/",
+      "entrypoint": "Dockerfile.vercel"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "laravel"
+      }
+    }
+  ]
+}

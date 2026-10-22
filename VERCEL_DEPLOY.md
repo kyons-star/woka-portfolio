@@ -5,20 +5,24 @@ a static site and expects a `dist/` directory. Laravel's Vite plugin correctly
 puts compiled assets in `public/build`; a static Vite deployment would still
 not run Laravel routes, Blade pages, or authentication.
 
-This project includes [`woka/Dockerfile.vercel`](./woka/Dockerfile.vercel) for Vercel's [Container Runtime](https://vercel.com/docs/functions/runtimes/container),
-which runs Laravel with PHP-FPM and Nginx instead of treating the app as static
+The root [`vercel.json`](./vercel.json) routes all paths to the Laravel service
+and uses [`woka/Dockerfile.vercel`](./woka/Dockerfile.vercel) with Vercel's
+[Container Runtime](https://vercel.com/docs/functions/runtimes/container).
+This runs Laravel with PHP-FPM and Nginx instead of treating the app as static
 files.
 
 ## Configure Vercel
 
-1. Push the commit containing `woka/Dockerfile.vercel` to the GitHub branch
-   connected to your Vercel project.
+1. Push the commit containing `vercel.json` and `woka/Dockerfile.vercel` to the
+   GitHub branch connected to your Vercel project.
 2. In Vercel **Project → Settings → Build and Deployment**:
-   - Set **Root Directory** to `woka`.
-   - Set **Framework Preset** to **Container** (or clear the Vite preset).
+   - Keep **Root Directory** at the repository root (do not set it to `woka`).
+   - Set **Framework Preset** to **Other**.
+   - Clear the custom **Build Command** so Vercel uses `vercel.json`.
    - Clear any custom **Output Directory** value such as `dist`.
-   - Leave the build command unset; the container build runs `npm ci`,
-     `npm run build`, and production Composer installation.
+   The root `vercel.json` sends requests to the container service in `woka/`;
+   the container build runs `npm ci`, `npm run build`, and production Composer
+   installation.
 3. In **Settings → Environment Variables**, configure these for Production
    and Preview as needed:
    - `APP_ENV=production`
